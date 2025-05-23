@@ -1,0 +1,83 @@
+body {
+  background-color: #1e1e2f;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 50px; /* במקום justify-content */
+  gap: 20px;
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+.form {
+  display: flex;
+  gap: 10px;
+}
+
+input {
+  background-color: #3f3f91;
+  border: none;
+  border-radius: 10px;
+  height: 50px;
+  padding: 0 15px;
+  font-size: 1.2rem;
+  color: white;
+}
+
+button {
+  height: 50px;
+  padding: 0 20px;
+  background-color: #6a5acd;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #7b68ee;
+}
+
+.tasks-container {
+  margin-top: 50px;
+}
+
+.card {
+  background-color: #2e2e4d;
+  color: white;
+  padding: 15px 20px;
+  margin-top: 10px;
+  border-radius: 12px;
+  width: 320px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 10px 10px 12px rgba(0, 0, 0, 0.89);
+  font-size: 1.2rem;
+}
+
+.card button {
+  background-color: #6a0dad00;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+}
+
+.card button:hover {
+  background-color: #8a2be2;
+}
