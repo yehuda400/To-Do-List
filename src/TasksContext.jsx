@@ -1,41 +1,48 @@
 import { createContext, useState, useEffect } from "react";
 
+import createId from "./utils/generateUniqueId";
+
 export const TasksContext = createContext({
   tasks: [],
-  addTask: () => {},
-  deleteTask: () => {},
+  onAddTask: () => {},
+  onDeleteTask: () => {},
+  onEditTask: () => {},
 });
 
 export default function TasksContextProvider({ children }) {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState([
+    {
+      id: "1",
+      taskName: "Sample Task",
+    },
+  ]);
 
   useEffect(() => {
     console.log(tasks);
   }, [tasks]);
 
-  function onDeleteTask(t) {
-    setTasks((prevTasks) => {
-      const index = prevTasks.indexOf(t);
-
-      const duplicatedTasks = [...prevTasks];
-      duplicatedTasks.splice(index, 1);
-      return duplicatedTasks;
-    });
+  function onAddTask(taskName) {
+    const newTask = { id: createId(), taskName };
+    setTasks((prev) => [...prev, newTask]);
   }
 
-  function handleSave(task) {
-    if (task) {
-      console.log(task);
-      setTasks((prev) => [...prev, task]);
-    }
+  function onDeleteTask(taskId) {
+    setTasks((prev) => prev.filter((task) => task.id !== taskId));
+  }
+
+  function onEditTask({ id, newName }) {
+    setTasks((prev) =>
+      prev.map((t) => (t.id === id ? { ...t, taskName: newName } : t))
+    );
   }
 
   return (
     <TasksContext
       value={{
         tasks,
-        addTask: handleSave,
-        deleteTask: onDeleteTask,
+        onAddTask,
+        onDeleteTask,
+        onEditTask,
       }}
     >
       {children}

@@ -7,7 +7,7 @@ export default function Tasks() {
 
   return (
     <div className="tasks-container">
-      {tasks.length > 0 && tasks.map((t) => <TaskCard task={t} />)}
+      {tasks.length > 0 && tasks.map((t) => <TaskCard task={t} key={t.id} />)}
     </div>
   );
 }
