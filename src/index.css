@@ -62,7 +62,8 @@ button:hover {
   border-radius: 12px;
   width: 320px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  /* justify-content: space-between; */
   align-items: center;
   box-shadow: 0px 10px 12px rgba(0, 0, 0, 0.89);
   font-size: 1.2rem;
@@ -75,6 +76,11 @@ button:hover {
   font-size: 1rem;
   border: none;
   border-radius: 12px;
+  margin-bottom: 23px;
+}
+
+.card .card-task-name {
+  padding: 20px;
 }
 
 .card button {

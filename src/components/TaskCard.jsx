@@ -2,7 +2,8 @@ import { useContext, useRef, useState, useEffect } from "react";
 import { TasksContext } from "../TasksContext";
 
 export default function TaskCard({ task }) {
-  const { onDeleteTask, onEditTask } = useContext(TasksContext);
+  const { onDeleteTask, onEditTask, onMoveDownTask, onMoveUpTask } =
+    useContext(TasksContext);
   const [isEditing, setIsEditing] = useState(false);
   const inputRef = useRef();
 
@@ -25,15 +26,24 @@ export default function TaskCard({ task }) {
     onEditTask({ id: task.id, newName: inputRef.current.value });
   }
 
+  function handleMoveDownTask(id) {
+    onMoveDownTask(id);
+  }
+  function handleMoveUpTask(id) {
+    onMoveUpTask(id);
+  }
+
   return (
     <>
       <div className="card" key={task.id}>
         {!isEditing ? (
           <>
-            <div>{task.taskName}</div>
-            <div>
+            <div className="card-task-name">{task.taskName}</div>
+            <div className="actions">
+              <button onClick={() => handleMoveDownTask(task.id)}>⬇️</button>
               <button onClick={() => handleDeleteTask(task.id)}>❌</button>
               <button onClick={() => handleEditTask(task)}>✏️</button>
+              <button onClick={() => handleMoveUpTask(task.id)}>⬆️</button>
             </div>
           </>
         ) : (

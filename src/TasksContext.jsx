@@ -7,6 +7,8 @@ export const TasksContext = createContext({
   onAddTask: () => {},
   onDeleteTask: () => {},
   onEditTask: () => {},
+  onMoveUpTask: () => {},
+  onMoveDownTask: () => {},
 });
 
 export default function TasksContextProvider({ children }) {
@@ -36,6 +38,32 @@ export default function TasksContextProvider({ children }) {
     );
   }
 
+  function onMoveUpTask(id) {
+    setTasks((prev) => {
+      const index = prev.findIndex((t) => t.id === id);
+      if (index <= 0) return prev;
+      const newTasks = [...prev];
+      [newTasks[index], newTasks[index - 1]] = [
+        newTasks[index - 1],
+        newTasks[index],
+      ];
+      return newTasks;
+    });
+  }
+
+  function onMoveDownTask(id) {
+    setTasks((prev) => {
+      const index = prev.findIndex((t) => t.id === id);
+      if (index === -1 || index === prev.length - 1) return prev;
+      const newTasks = [...prev];
+      [newTasks[index], newTasks[index + 1]] = [
+        newTasks[index + 1],
+        newTasks[index],
+      ];
+      return newTasks;
+    });
+  }
+
   return (
     <TasksContext
       value={{
@@ -43,6 +71,8 @@ export default function TasksContextProvider({ children }) {
         onAddTask,
         onDeleteTask,
         onEditTask,
+        onMoveUpTask,
+        onMoveDownTask,
       }}
     >
       {children}
